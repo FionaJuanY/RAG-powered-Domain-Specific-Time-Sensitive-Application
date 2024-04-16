@@ -5,25 +5,29 @@
 
 **Abstract:** Given their exceptional text generating capability, LLM-backed Q&A systems are gaining significant popularity. However, they are limited by their training data which may not be domain-specific or up-to-date. Retrieval-Augmented Generation (RAG) provides a solution. Based on RAG, this project builds an application that is able to answer domain-specific/time-sensitive questions. Moreover, a dataset containing question-context-answer triplets for Apple’s Annual Earnings Report 2022 is used to evaluate the application. The large language model (LLM) which is used to generate answers improve its performance significantly after RAG is included.
 
-**Introduction:** Retrieval-Augmented Generation (RAG) was proposed by Meta in 2020. It works by allowing input of user-defined knowledge bases, retrieving contextual information that is relevant to a specific question from knowledge bases and then generating a desirable answer to the question based on the retrieved contextual information. This application is built based on this RAG framework and aims to answer domain-specific/time-sensitive questions.
+**Introduction** 
 
-**Methods:** The architecture of the application consists of three main components, a processor, a retriever and a generator. The processor breaks the documents in the knowledge bases into text chunks, and is built with spaCy in this application. From the text chunks, the retriever retrieves the top-k chunks that are the most relevant to a user’s question. Sentence-transformers/all-MiniLM-L6-v2, which was the most downloaded model among sentence-transformers when this project was being implemented, along with cosine similarity is used to build the retriever. Given the top-k relevant chunks and the question from the user, the generator generates an answer to the question. Llama-2-7B-Chat-GGUF, which can be run on CPU, is used as the generator in this application.
+Retrieval-Augmented Generation (RAG) was proposed by Meta in 2020. It works by allowing input of user-defined knowledge bases, retrieving contextual information that is relevant to a specific question from knowledge bases and then generating a desirable answer to the question based on the retrieved contextual information. This application is built based on this RAG framework and aims to answer domain-specific/time-sensitive questions.
+
+**Methods**
+
+The architecture of the application consists of three main components, a processor, a retriever and a generator. The processor breaks the documents in the knowledge bases into text chunks, and is built with spaCy in this application. From the text chunks, the retriever retrieves the top-k chunks that are the most relevant to a user’s question. Sentence-transformers/all-MiniLM-L6-v2, which was the most downloaded model among sentence-transformers when this project was being implemented, along with cosine similarity is used to build the retriever. Given the top-k relevant chunks and the question from the user, the generator generates an answer to the question. Llama-2-7B-Chat-GGUF, which can be run on CPU, is used as the generator in this application.
 
 **Usage** 
 
-Step 0: Download the code folder
+**Step 0:** Download the code folder
 
 **- Runing from source**
 
-Step 1: Install necessary packages
+**Step 1:** Install necessary packages
 pip install -r requirements.txt
 
-Step 2: Import necessary files via:
+**Step 2:** Import necessary files via:
 from your_path/code/processor import Processor
 from your_path/code/retriever import Retriever
 from your_path/code/generator import Generator
 
-Step 3: Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
+**Step 3:** Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
 
 processor = Processor('you source document')
 
@@ -33,7 +37,7 @@ chunks = processor.get_chunks()
 Split the document by n-tokens (default number of tokens is 100)
 chunks = processor.get_chunks(by_tokens=True, num_tokens=100)
 
-Step 4: Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
+**Step 4:** Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
 
 encoder = 'sentence-transformers/all-MiniLM-L6-v2'
 retriever = Retriever(encoder, chunks)
@@ -47,7 +51,7 @@ context = retriever.retrieve_context(chunks_embeddings, query, k=1) # default va
 if the document is split by sentence, min length can be set on the context retrieved: 
 context = retriever.retrieve_context(sentences_embeddings, query, k=1, enhanced=True, min_length=256) # default values of min_length is 256.
 
-Step 5: Build a generator using TheBloke/Llama-2-7B-Chat-GGUF, and generate an answer to the question. 
+**Step 5:** Build a generator using TheBloke/Llama-2-7B-Chat-GGUF, and generate an answer to the question. 
 
 model='TheBloke/Llama-2-7B-Chat-GGUF'
 model_file = 'llama-2-7b-chat.Q4_K_M.gguf'
@@ -58,18 +62,20 @@ answer = generator.generate_answer(context, query)
 
 **- Runing the application**
 
-Step 1: Create a conda environment and activate the environment
+**Step 1:** Create a conda environment and activate the environment
 conda create -n your_ environment
 conda activate your_ environment
 
-Step 2: Install necessary packages
+**Step 2:** Install necessary packages
 conda install pip
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 
-Step 3: execute “streamlit run scripts.py”
+**Step 3:** execute “streamlit run scripts.py”
 
-**Evaluation:** The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022. (https://huggingface.co/datasets/lighthouzai/finqabench) Different context length strategies were applied and results were compared.
+**Evaluation** 
+
+The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022. (https://huggingface.co/datasets/lighthouzai/finqabench) Different context length strategies were applied and results were compared.
 
 Specifically, generated answers were evaluation based on the semantic similarity to the ground truth, and the results are as follows:
 
@@ -80,9 +86,17 @@ Specifically, generated answers were evaluation based on the semantic similarity
 | RAG Multi-sentence context (max length of 256)|         0.66      |
 | RAG 100-tokens context                        |         0.67      |
 
-**Discussion** In general, this application can have significantly better results than no-context generation. It could be used in a wide range of areas where specific knowledge bases are needed. For example, listed companies can use it to answer shareholders’ questions about their earnings reports, while manufacturers can use it to answer their clients’ questions about their products. However, as we can see from the evaluation, context with proper length can enable the application to have even better performance. Therefore, future work will be focused on how to automatically decide the best length of context. 
+**Discussion** 
 
-**Conclusion** This project builds an application based on the RAG framework, which enables large language models to generate answers to domain-specific/time-sensitive questions. It is achieved by allowing users to input extra knowledge bases, retrieving information from the knowledge bases that is relevant to a specific question and feeding both the retrieved information and the question to a generator, which is a LLM in this application. In this application, local files in the format of pdf, docx, and txt as well as urls are supported as extra knowledge bases. Moreover, multiple context length strategies were evaluated, which revealed the importance of the proper length of context and pointed to a direction for the future work. 
+In general, this application can have significantly better results than no-context generation. It could be used in a wide range of areas where specific knowledge bases are needed. For example, listed companies can use it to answer shareholders’ questions about their earnings reports, while manufacturers can use it to answer their clients’ questions about their products. 
+
+However, as we can see from the evaluation, context with proper length can enable the application to have even better performance. Therefore, future work will be focused on how to automatically decide the best length of context. 
+
+**Conclusion** 
+
+This project builds an application based on the RAG framework, which enables large language models to generate answers to domain-specific/time-sensitive questions. It is achieved by allowing users to input extra knowledge bases, retrieving information from the knowledge bases that is relevant to a specific question and feeding both the retrieved information and the question to a generator, which is a LLM in this application. In this application, local files in the format of pdf, docx, and txt as well as urls are supported as extra knowledge bases. 
+
+Moreover, multiple context length strategies were evaluated, which revealed the importance of the proper length of context and pointed to a direction for the future work. 
 
 **References:**
 
