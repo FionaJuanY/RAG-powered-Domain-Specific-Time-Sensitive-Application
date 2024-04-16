@@ -26,13 +26,13 @@ pip install -r requirements.txt
 ```
 
 **Step 2:** Import necessary files:
-
+```
 from your_path/code/processor import Processor
 
 from your_path/code/retriever import Retriever
 
 from your_path/code/generator import Generator
-
+```
 **Step 3:** Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
 
 processor = Processor('you source document')
