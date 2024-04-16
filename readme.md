@@ -93,7 +93,6 @@ RAG 100-tokens context	0.67
 | RAG Multi-sentence context (max length of 256)|         0.63      |
 | :---------------------------------------------|:-----------------:|
 | RAG 100-tokens context                        |         0.63      |
-| :---------------------------------------------|:-----------------:|
 
 
 Discussion (analysis)
