@@ -73,17 +73,6 @@ Step 3: execute “streamlit run scripts.py”
 
 Specifically, generated answers were evaluation based on the semantic similarity to the ground truth, and the results are as follows:
 
- 	                                 Cosine similarity
-
-Baseline - no context	                       0.57
-
-RAG one sentence context	                0.63
-
-RAG Multi-sentence context (max length of 256)
-	             0.66
-
-RAG 100-tokens context	0.67
-
 |                                               | Cosine similarity |
 | :---------------------------------------------|:-----------------:|
 | Baseline - no context                         |         0.57      |
@@ -91,18 +80,22 @@ RAG 100-tokens context	0.67
 | RAG Multi-sentence context (max length of 256)|         0.66      |
 | RAG 100-tokens context                        |         0.67      |
 
+**Discussion** In general, this application can have significantly better results than no-context generation. It could be used in a wide range of areas where specific knowledge bases are needed. For example, listed companies can use it to answer shareholders’ questions about their earnings reports, while manufacturers can use it to answer their clients’ questions about their products. However, as we can see from the evaluation, context with proper length can enable the application to have even better performance. Therefore, future work will be focused on how to automatically decide the best length of context. 
 
-Discussion (analysis)
-In general, this application can have significantly better results than no-context generation. It could be used in a wide range of areas where specific knowledge bases are needed. For example, listed companies can use it to answer shareholders’ questions about their earnings reports, while manufacturers can use it to answer their clients’ questions about their products. 
-However, as we can see from the evaluation, context with proper length can enable the application to have even better performance. Therefore, future work will be focused on how to automatically decide the best length of context. 
-Conclusion
-This project builds an application based on the RAG framework, which enables large language models to generate answers to domain-specific/time-sensitive questions. It is achieved by allowing users to input extra knowledge bases, retrieving information from the knowledge bases that is relevant to a specific question and feeding both the retrieved information and the question to a generator, which is a LLM in this application. In this application, local files in the format of pdf, docx, and txt as well as urls are supported as extra knowledge bases. 
-Moreover, multiple context length strategies were evaluated, which revealed the importance of the proper length of context and pointed to a direction for the future work. 
-References: 
+**Conclusion** This project builds an application based on the RAG framework, which enables large language models to generate answers to domain-specific/time-sensitive questions. It is achieved by allowing users to input extra knowledge bases, retrieving information from the knowledge bases that is relevant to a specific question and feeding both the retrieved information and the question to a generator, which is a LLM in this application. In this application, local files in the format of pdf, docx, and txt as well as urls are supported as extra knowledge bases. Moreover, multiple context length strategies were evaluated, which revealed the importance of the proper length of context and pointed to a direction for the future work. 
+
+**References:**
+
 [1.] Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., & Kiela, D. (2020). Retrieval-augmented generation for knowledge-intensive nlp tasks. Advances in Neural Information Processing Systems, 33, 9459-9474. https://proceedings.neurips.cc/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf
+
 [2.] Karpukhin, V., Oğuz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., & Yih, W. T. (2020). Dense passage retrieval for open-domain question answering. In EMNLP 2020 - 2020 Conference on Empirical Methods in Natural Language Processing, Proceedings of the Conference (pp. 6769-6781). (EMNLP 2020 - 2020 Conference on Empirical Methods in Natural Language Processing, Proceedings of the Conference). Association for Computational Linguistics (ACL). https://aclanthology.org/2020.emnlp-main.550.pdf
+
 [3.] Wang, Z., Araki, J., Jiang, Z., Parvez, M. R., & Neubig, G. (2023). Learning to filter context for retrieval-augmented generation. arXiv preprint arXiv:2311.08377. https://arxiv.org/pdf/2311.08377.pdf
+
 [4.] Lighthouz AI. (n.d.). FinQABench. Hugging Face. https://huggingface.co/datasets/lighthouzai/finqabench
+
 [5.] Briggs, J. (2023, July 29). Better Llama 2 with Retrieval Augmented Generation (RAG) [Video]. YouTube. https://www.youtube.com/watch?v=ypzmPwLH_Q4
+
 [6.] Sentence Transformers. (n.d.). Sentence Transformers: all-MiniLM-L6-v2. Hugging Face.https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+
 [7.] Jobbins, T. (n.d.). TheBloke/Llama-2-7B-Chat-GGUF. Hugging Face. https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
