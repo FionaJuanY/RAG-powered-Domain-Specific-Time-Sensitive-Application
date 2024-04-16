@@ -1,40 +1,62 @@
 
 **Title:** RAG-powered Domain-Specific/Time-Sensitive Q&A Application
 
-Author: Juan Yu
-Abstract: Given their exceptional text generating capability, LLM-backed Q&A systems are gaining significant popularity. However, they are limited by their training data which may not be domain-specific or up-to-date. Retrieval-Augmented Generation (RAG) provides a solution. Based on RAG, this project builds an application that is able to answer domain-specific/time-sensitive questions. Moreover, a dataset containing question-context-answer triplets for Apple’s Annual Earnings Report 2022 is used to evaluate the application. The large language model (LLM) which is used to generate answers improve its performance significantly after RAG is included.
-Introduction:Retrieval-Augmented Generation (RAG) was proposed by Meta in 2020. It works by allowing input of user-defined knowledge bases, retrieving contextual information that is relevant to a specific question from knowledge bases and then generating a desirable answer to the question based on the retrieved contextual information. This application is built based on this RAG framework and aims to answer domain-specific/time-sensitive questions.
-Methods: The architecture of the application consists of three main components, a processor, a retriever and a generator. The processor breaks the documents in the knowledge bases into text chunks, and is built with spaCy in this application. From the text chunks, the retriever retrieves the top-k chunks that are the most relevant to a user’s question. Sentence-transformers/all-MiniLM-L6-v2, which was the most downloaded model among sentence-transformers when this project was being implemented, along with cosine similarity is used to build the retriever. Given the top-k relevant chunks and the question from the user, the generator generates an answer to the question. Llama-2-7B-Chat-GGUF, which can be run on CPU, is used as the generator in this application.
-Usage 
+**Author:** Juan Yu
+
+**Abstract:** Given their exceptional text generating capability, LLM-backed Q&A systems are gaining significant popularity. However, they are limited by their training data which may not be domain-specific or up-to-date. Retrieval-Augmented Generation (RAG) provides a solution. Based on RAG, this project builds an application that is able to answer domain-specific/time-sensitive questions. Moreover, a dataset containing question-context-answer triplets for Apple’s Annual Earnings Report 2022 is used to evaluate the application. The large language model (LLM) which is used to generate answers improve its performance significantly after RAG is included.
+
+**Introduction:** Retrieval-Augmented Generation (RAG) was proposed by Meta in 2020. It works by allowing input of user-defined knowledge bases, retrieving contextual information that is relevant to a specific question from knowledge bases and then generating a desirable answer to the question based on the retrieved contextual information. This application is built based on this RAG framework and aims to answer domain-specific/time-sensitive questions.
+
+**Methods:** The architecture of the application consists of three main components, a processor, a retriever and a generator. The processor breaks the documents in the knowledge bases into text chunks, and is built with spaCy in this application. From the text chunks, the retriever retrieves the top-k chunks that are the most relevant to a user’s question. Sentence-transformers/all-MiniLM-L6-v2, which was the most downloaded model among sentence-transformers when this project was being implemented, along with cosine similarity is used to build the retriever. Given the top-k relevant chunks and the question from the user, the generator generates an answer to the question. Llama-2-7B-Chat-GGUF, which can be run on CPU, is used as the generator in this application.
+
+**Usage** 
 Step 0: Download the code folder
-- Runing from source
+
+**- Runing from source**
+
 Step 1: Install necessary packages
 pip install -r requirements.txt
+
 Step 2: Import necessary files via:
 from your_path/code/processor import Processor
 from your_path/code/retriever import Retriever
 from your_path/code/generator import Generator
+
 Step 3: Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
+
 processor = Processor('you source document')
+
 # Split the document by sentence (default)
 chunks = processor.get_chunks()
+
 # Split the document by n-tokens (default number of tokens is 100)
 chunks = processor.get_chunks(by_tokens=True, num_tokens=100)
-Step 3: Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
+
+Step 4: Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
+
 encoder = 'sentence-transformers/all-MiniLM-L6-v2'
 retriever = Retriever(encoder, chunks)
+
 chunks_embeddings = retriever.chunks_embedding()
+
 query = "enter your question here"
+
 context = retriever.retrieve_context(chunks_embeddings, query, k=1) # default value of k is 1
+
 # if the document is split by sentence, min length can be set on the context retrieved: 
 context = retriever.retrieve_context(sentences_embeddings, query, k=1, enhanced=True, min_length=256) # default values of min_length is 256.
-Step 4: Build a generator using TheBloke/Llama-2-7B-Chat-GGUF, and generate an answer to the question. 
+
+Step 5: Build a generator using TheBloke/Llama-2-7B-Chat-GGUF, and generate an answer to the question. 
+
 model='TheBloke/Llama-2-7B-Chat-GGUF'
 model_file = 'llama-2-7b-chat.Q4_K_M.gguf'
 model_type='llama'
 generator = Generator(model=model, model_file=model_file, model_type=model_type)
+
 answer = generator.generate_answer(context, query)
-- Runing the application
+
+**- Runing the application**
+
 Step 1: Create a conda environment and activate the environment
 conda create -n your_ environment
 conda activate your_ environment
@@ -45,9 +67,11 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 
 Step 3: execute “streamlit run scripts.py”
-Evaluation: The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022. (https://huggingface.co/datasets/lighthouzai/finqabench) Different context length strategies were applied and results were compared.
-The evaluation was made on two dimensions. 
-First, retrieved contexts were evaluated based ROUGE scores (compared to reference contexts) as follows.
+
+**Evaluation:** The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022. (https://huggingface.co/datasets/lighthouzai/finqabench) Different context length strategies were applied and results were compared.
+
+The evaluation was made on two dimensions. First, retrieved contexts were evaluated based ROUGE scores (compared to reference contexts) as follows.
+
 	Rouge1 Precision	Rouge1 Recall	Rouge1 F1	RougeL Precision	RougeL Recall	RougeL F1
 One-sentence context	0.77	0.26	0.33	0.70	0.23	0.30
 Multi-sentence context
