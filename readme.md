@@ -19,10 +19,12 @@ The architecture of the application consists of three main components, a process
 
 **- Runing from source**
 
-**Step 1:** Install necessary packages
+**Step 1:** Install necessary packages: 
+
 pip install -r requirements.txt
 
-**Step 2:** Import necessary files via:
+**Step 2:** Import necessary files:
+
 from your_path/code/processor import Processor
 from your_path/code/retriever import Retriever
 from your_path/code/generator import Generator
