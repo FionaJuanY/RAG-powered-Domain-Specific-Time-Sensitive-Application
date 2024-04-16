@@ -84,6 +84,10 @@ RAG Multi-sentence context (max length of 256)
 
 RAG 100-tokens context	0.67
 
+| Left-aligned | Center-aligned | Right-aligned |
+| :------------|:--------------:|--------------:|
+| Left content | Center content | Right content |
+
 
 Discussion (analysis)
 In general, this application can have significantly better results than no-context generation. It could be used in a wide range of areas where specific knowledge bases are needed. For example, listed companies can use it to answer shareholders’ questions about their earnings reports, while manufacturers can use it to answer their clients’ questions about their products. 
