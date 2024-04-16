@@ -70,13 +70,21 @@ python -m spacy download en_core_web_sm
 Step 3: execute “streamlit run scripts.py”
 
 **Evaluation:** The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022. (https://huggingface.co/datasets/lighthouzai/finqabench) Different context length strategies were applied and results were compared.
+
 Specifically, generated answers were evaluation based on the semantic similarity to the ground truth, and the results are as follows:
- 	                     Cosine similarity
-Baseline - no context	          0.57
-RAG one sentence context	  0.63
+
+ 	                                 Cosine similarity
+
+Baseline - no context	                       0.57
+
+RAG one sentence context	                0.63
+
 RAG Multi-sentence context (max length of 256)
 	             0.66
+
 RAG 100-tokens context	0.67
+
+
 Discussion (analysis)
 In general, this application can have significantly better results than no-context generation. It could be used in a wide range of areas where specific knowledge bases are needed. For example, listed companies can use it to answer shareholders’ questions about their earnings reports, while manufacturers can use it to answer their clients’ questions about their products. 
 However, as we can see from the evaluation, context with proper length can enable the application to have even better performance. Therefore, future work will be focused on how to automatically decide the best length of context. 
