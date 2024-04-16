@@ -10,6 +10,7 @@
 **Methods:** The architecture of the application consists of three main components, a processor, a retriever and a generator. The processor breaks the documents in the knowledge bases into text chunks, and is built with spaCy in this application. From the text chunks, the retriever retrieves the top-k chunks that are the most relevant to a user’s question. Sentence-transformers/all-MiniLM-L6-v2, which was the most downloaded model among sentence-transformers when this project was being implemented, along with cosine similarity is used to build the retriever. Given the top-k relevant chunks and the question from the user, the generator generates an answer to the question. Llama-2-7B-Chat-GGUF, which can be run on CPU, is used as the generator in this application.
 
 **Usage** 
+
 Step 0: Download the code folder
 
 **- Runing from source**
