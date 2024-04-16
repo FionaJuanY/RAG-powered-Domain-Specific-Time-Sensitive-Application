@@ -34,19 +34,19 @@ from your_path/code/retriever import Retriever
 from your_path/code/generator import Generator
 ```
 **Step 3:** Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
-
+```
 processor = Processor('you source document')
-
+```
 *Split the document by sentence (default)*
-
+```
 chunks = processor.get_chunks()
-
+```
 *Split the document by n-tokens (default number of tokens is 100)*
-
+```
 chunks = processor.get_chunks(by_tokens=True, num_tokens=100)
-
+```
 **Step 4:** Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
-
+```
 encoder = 'sentence-transformers/all-MiniLM-L6-v2'
 
 retriever = Retriever(encoder, chunks)
@@ -56,13 +56,15 @@ chunks_embeddings = retriever.chunks_embedding()
 query = "enter your question here"
 
 context = retriever.retrieve_context(chunks_embeddings, query, k=1) # default value of k is 1
-
+```
 *If the document is split by sentence, min length can be set on the context retrieved:*
-
-context = retriever.retrieve_context(sentences_embeddings, query, k=1, enhanced=True, min_length=256) *( default values of min_length is 256.)*
+```
+context = retriever.retrieve_context(sentences_embeddings, query, k=1, enhanced=True, min_length=256)
+```
+ *( default values of min_length is 256.)*
 
 **Step 5:** Build a generator using TheBloke/Llama-2-7B-Chat-GGUF, and generate an answer to the question. 
-
+```
 model='TheBloke/Llama-2-7B-Chat-GGUF'
 
 model_file = 'llama-2-7b-chat.Q4_K_M.gguf'
@@ -72,24 +74,24 @@ model_type='llama'
 generator = Generator(model=model, model_file=model_file, model_type=model_type)
 
 answer = generator.generate_answer(context, query)
-
+```
 **- Runing the application**
 
 **Step 1:** Create a conda environment and activate the environment
-
+```
 conda create -n your_ environment
 
 conda activate your_ environment
-
+```
 **Step 2:** Install necessary packages
-
+```
 conda install pip
 
 pip install -r requirements.txt
 
 python -m spacy download en_core_web_sm
-
-**Step 3:** execute “streamlit run scripts.py”
+```
+**Step 3:** execute ```streamlit run scripts.py```
 
 **Evaluation** 
 
