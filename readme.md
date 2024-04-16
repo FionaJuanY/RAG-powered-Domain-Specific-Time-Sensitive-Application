@@ -84,9 +84,16 @@ RAG Multi-sentence context (max length of 256)
 
 RAG 100-tokens context	0.67
 
-| Left-aligned | Center-aligned | Right-aligned |
-| :------------|:--------------:|--------------:|
-| Left content | Center content | Right content |
+|                                               | Cosine similarity |
+| :---------------------------------------------|:-----------------:|
+| Baseline - no context                         |         0.57      |
+| :---------------------------------------------|:-----------------:|
+| RAG one sentence context                      |         0.63      |
+| :---------------------------------------------|:-----------------:|
+| RAG Multi-sentence context (max length of 256)|         0.63      |
+| :---------------------------------------------|:-----------------:|
+| RAG 100-tokens context                        |         0.63      |
+| :---------------------------------------------|:-----------------:|
 
 
 Discussion (analysis)
