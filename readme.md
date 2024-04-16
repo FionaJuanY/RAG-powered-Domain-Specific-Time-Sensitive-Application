@@ -57,7 +57,7 @@ context = retriever.retrieve_context(chunks_embeddings, query, k=1) # default va
 
 *if the document is split by sentence, min length can be set on the context retrieved:*
 
-context = retriever.retrieve_context(sentences_embeddings, query, k=1, enhanced=True, min_length=256) # default values of min_length is 256.
+context = retriever.retrieve_context(sentences_embeddings, query, k=1, enhanced=True, min_length=256) *( default values of min_length is 256.)*
 
 **Step 5:** Build a generator using TheBloke/Llama-2-7B-Chat-GGUF, and generate an answer to the question. 
 
