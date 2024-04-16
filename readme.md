@@ -1,5 +1,5 @@
 
-**Title:** RAG-powered Domain-Specific/Time-Sensitive Q&A Application
+# **Title:** RAG-powered Domain-Specific/Time-Sensitive Q&A Application
 
 **Author:** Juan Yu
 
