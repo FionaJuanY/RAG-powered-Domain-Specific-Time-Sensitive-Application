@@ -27,10 +27,10 @@ Step 3: Build a processor and split the source document into chunks. The source 
 
 processor = Processor('you source document')
 
-# Split the document by sentence (default)
+Split the document by sentence (default)
 chunks = processor.get_chunks()
 
-# Split the document by n-tokens (default number of tokens is 100)
+Split the document by n-tokens (default number of tokens is 100)
 chunks = processor.get_chunks(by_tokens=True, num_tokens=100)
 
 Step 4: Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
@@ -44,7 +44,7 @@ query = "enter your question here"
 
 context = retriever.retrieve_context(chunks_embeddings, query, k=1) # default value of k is 1
 
-# if the document is split by sentence, min length can be set on the context retrieved: 
+if the document is split by sentence, min length can be set on the context retrieved: 
 context = retriever.retrieve_context(sentences_embeddings, query, k=1, enhanced=True, min_length=256) # default values of min_length is 256.
 
 Step 5: Build a generator using TheBloke/Llama-2-7B-Chat-GGUF, and generate an answer to the question. 
@@ -70,20 +70,12 @@ python -m spacy download en_core_web_sm
 Step 3: execute “streamlit run scripts.py”
 
 **Evaluation:** The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022. (https://huggingface.co/datasets/lighthouzai/finqabench) Different context length strategies were applied and results were compared.
-
-The evaluation was made on two dimensions. First, retrieved contexts were evaluated based ROUGE scores (compared to reference contexts) as follows.
-
-	Rouge1 Precision	Rouge1 Recall	Rouge1 F1	RougeL Precision	RougeL Recall	RougeL F1
-One-sentence context	0.77	0.26	0.33	0.70	0.23	0.30
-Multi-sentence context
-(max length of 256)	0.69	0.37	0.41	0.59	0.31	0.35
-100-tokens context	0.76	0.39	0.48	0.65	0.34	0.41
-Second, generated answers were evaluation based on the semantic similarity to the ground truth, and the results are as follows:
- 	Cosine similarity
-Baseline - no context	0.57
-RAG one sentence context	0.63
-RAG Multi-sentence context
-(max length of 256)	0.66
+Specifically, generated answers were evaluation based on the semantic similarity to the ground truth, and the results are as follows:
+ 	                     Cosine similarity
+Baseline - no context	          0.57
+RAG one sentence context	  0.63
+RAG Multi-sentence context (max length of 256)
+	             0.66
 RAG 100-tokens context	0.67
 Discussion (analysis)
 In general, this application can have significantly better results than no-context generation. It could be used in a wide range of areas where specific knowledge bases are needed. For example, listed companies can use it to answer shareholders’ questions about their earnings reports, while manufacturers can use it to answer their clients’ questions about their products. 
