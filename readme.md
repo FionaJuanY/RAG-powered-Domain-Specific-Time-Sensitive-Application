@@ -21,7 +21,9 @@ The architecture of the application consists of three main components, a process
 
 **Step 1:** Install necessary packages: 
 
+```
 pip install -r requirements.txt
+```
 
 **Step 2:** Import necessary files:
 
