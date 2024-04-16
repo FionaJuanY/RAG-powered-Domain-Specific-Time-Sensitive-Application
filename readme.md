@@ -26,7 +26,9 @@ pip install -r requirements.txt
 **Step 2:** Import necessary files:
 
 from your_path/code/processor import Processor
+
 from your_path/code/retriever import Retriever
+
 from your_path/code/generator import Generator
 
 **Step 3:** Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
@@ -34,9 +36,11 @@ from your_path/code/generator import Generator
 processor = Processor('you source document')
 
 Split the document by sentence (default)
+
 chunks = processor.get_chunks()
 
 Split the document by n-tokens (default number of tokens is 100)
+
 chunks = processor.get_chunks(by_tokens=True, num_tokens=100)
 
 **Step 4:** Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
