@@ -86,10 +86,12 @@ conda create -n your_ environment
 conda activate your_ environment
 ```
 **Step 2:** Install necessary packages
+
 ```
 conda install pip
 
-pip install -r requirements.txt
+# *Please delete numpy==1.24.3 from requirements.txt as it is included by default in a conda environment*
+pip install -r requirements.txt 
 
 python -m spacy download en_core_web_sm
 ```
