@@ -17,7 +17,7 @@ The architecture of the application consists of three main components, a process
 
 **Step 0:** Download the code folder
 
-**- Runing from source**
+**- Running from source**
 
 **Step 1:** Install necessary packages: 
 
