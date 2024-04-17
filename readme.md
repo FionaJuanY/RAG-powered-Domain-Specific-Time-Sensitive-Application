@@ -11,7 +11,7 @@ Retrieval-Augmented Generation (RAG) was proposed by Meta in 2020. It works by a
 
 **Methods**
 
-The architecture of the application consists of three main components, a processor, a retriever and a generator. The processor breaks the documents in the knowledge bases into text chunks, and is built with spaCy in this application. From the text chunks, the retriever retrieves the top-k chunks that are the most relevant to a user’s question. Sentence-transformers/all-MiniLM-L6-v2, which was the most downloaded model among sentence-transformers when this project was being implemented, along with cosine similarity is used to build the retriever. Given the top-k relevant chunks and the question from the user, the generator generates an answer to the question. Llama-2-7B-Chat-GGUF, which can be run on CPU, is used as the generator in this application.
+The architecture of the application consists of three main components, a processor, a retriever and a generator. The processor breaks the documents in the knowledge bases into text chunks, and is built with spaCy in this application. From the text chunks, the retriever retrieves the top-k chunks that are the most relevant to a user’s question. A Sentence-Transformers model along with cosine similarity is used to build the retriever. Given the top-k relevant chunks and the question from the user, the generator generates an answer to the question. Llama-2-7B-Chat-GGUF, which can be run on CPU, is used as the generator in this application.
 
 **Usage** 
 
@@ -45,9 +45,11 @@ chunks = processor.get_chunks()
 ```
 chunks = processor.get_chunks(by_tokens=True, num_tokens=100)
 ```
-**Step 4:** Build a retriever using a sentence-transformers/all-MiniLM-L6-v2 and retrieve top-k text chunks that are the most relevant to a specific question.
+**Step 4:** Build a retriever using a Sentence-Transformers model and retrieve top-k text chunks that are the most relevant to a specific question.
+
+*You can choose a model from https://huggingface.co/sentence-transformers. For example, the most popular sentence-transformers/all-MiniLM-L6-v2*
 ```
-encoder = 'sentence-transformers/all-MiniLM-L6-v2'
+encoder = 'sentence-transformers/model of your choice'
 
 retriever = Retriever(encoder, chunks)
 
