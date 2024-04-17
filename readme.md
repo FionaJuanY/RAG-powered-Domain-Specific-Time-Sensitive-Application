@@ -97,7 +97,7 @@ python -m spacy download en_core_web_sm
 
 **Evaluation** 
 
-The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022. (https://huggingface.co/datasets/lighthouzai/finqabench) Different context length strategies were applied and results were compared.
+The evaluation was based on question-context-answer triplets for Apple’s Annual Earnings Report 2022(https://huggingface.co/datasets/lighthouzai/finqabench). Different context length strategies were applied and results were compared.
 
 Specifically, generated answers were evaluation based on the semantic similarity to the ground truth, and the results are as follows:
 
