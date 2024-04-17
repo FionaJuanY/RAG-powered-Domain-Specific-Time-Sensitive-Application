@@ -3,7 +3,7 @@
 
 **Author:** Juan Yu
 
-**Abstract:** Given their exceptional text generating capability, LLM-backed Q&A systems are gaining significant popularity. However, they are limited by their training data which may not be domain-specific or up-to-date. Retrieval-Augmented Generation (RAG) provides a solution. Based on RAG, this project builds an application that is able to answer domain-specific/time-sensitive questions. Moreover, a dataset containing question-context-answer triplets for Apple’s Annual Earnings Report 2022 is used for evaluation. The large language model (LLM) which is used to generate answers improve its performance significantly after RAG is included.
+**Abstract:** Given their exceptional text generating capability, LLM-backed Q&A systems are gaining significant popularity. However, they are limited by their training data which may not be domain-specific or up-to-date. Retrieval-Augmented Generation (RAG) provides a solution. Based on RAG, this project builds an application that is able to answer domain-specific/time-sensitive questions. Moreover, a dataset containing question-context-answer triplets for Apple’s Annual Earnings Report 2022 is used for evaluation. The large language model (LLM), which is used to generate answers, has its performance significantly improved after RAG is included.
 
 **Introduction** 
 
