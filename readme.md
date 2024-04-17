@@ -47,7 +47,7 @@ chunks = processor.get_chunks(by_tokens=True, num_tokens=100)
 ```
 **Step 4:** Build a retriever using a Sentence-Transformers model and retrieve top-k text chunks that are the most relevant to a specific question.
 
-*You can choose a model from https://huggingface.co/sentence-transformers. For example, the most popular sentence-transformers/all-MiniLM-L6-v2*
+*You can choose a model from https://huggingface.co/sentence-transformers. For example, the most popular sentence-transformers/all-MiniLM-L6-v2 is used in the application and the evaluation.*
 ```
 encoder = 'sentence-transformers/model of your choice'
 
