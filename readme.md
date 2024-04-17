@@ -93,7 +93,8 @@ conda install pip
 *Please delete numpy==1.24.3 from requirements.txt before running the following command as it is included by default in a conda environment; otherwise, there might be an error.*
 ```
 pip install -r requirements.txt 
-
+```
+```
 python -m spacy download en_core_web_sm
 ```
 **Step 3:** execute ```streamlit run scripts.py```
