@@ -35,7 +35,7 @@ from your_path.code.generator import Generator
 ```
 **Step 3:** Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
 ```
-processor = Processor('you source document')
+processor = Processor('path of your source document')
 ```
 *Split the document by sentence (default)*
 ```
