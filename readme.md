@@ -77,7 +77,7 @@ generator = Generator(model=model, model_file=model_file, model_type=model_type)
 
 answer = generator.generate_answer(context, query)
 ```
-**- Runing the application**
+**- Running the application**
 
 **Step 1:** Create a conda environment and activate the environment
 ```
