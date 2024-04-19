@@ -33,7 +33,7 @@ from your_path.code.retriever import Retriever
 
 from your_path.code.generator import Generator
 ```
-**Step 3:** Build a processor and split the source document into chunks. The source document can be in the format of docx, pdf or txt or can be an url. 
+**Step 3:** Build a processor and split the source document into chunks. The source document can be a local file in the format of docx, pdf or txt or can be an url, for example "D:\app\Federal Reserve Press Release March 20.pdf"
 ```
 processor = Processor('path of your source document')
 ```
@@ -97,7 +97,11 @@ pip install -r requirements.txt
 ```
 python -m spacy download en_core_web_sm
 ```
-**Step 3:** execute ```streamlit run scripts.py```
+**Step 3:** Run the scripts. 
+
+ ```streamlit run your_path\code\scripts.py```
+ 
+ *When hinted "Please provide document source", enter your file path or url, like D:\app\Federal Reserve Press Release March 20.pdf.*
 
 **Evaluation** 
 
